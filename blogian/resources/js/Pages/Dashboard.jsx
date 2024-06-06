@@ -16,6 +16,19 @@ export default function Dashboard({ auth }) {
                     </div>
                 </div>
             </div>
+            
+            <div className="py-12">
+                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="p-6 text-gray-900 flex flex-row justify-around">
+                            Choose Your Avatar  
+                            <button className='bg-black text-white text-lg w-[100px] h-[50px] rounded-[16px]' >
+                             <a href='/avatar'>  Choose </a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </AuthenticatedLayout>
     );
 }

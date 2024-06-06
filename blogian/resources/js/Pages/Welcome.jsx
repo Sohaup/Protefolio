@@ -2,12 +2,15 @@ import { Link, Head } from '@inertiajs/react';
 
 
 
-export function Nav() {
+export function Nav(props) {
     return (
-       <nav className='w-100 absolute mt-5 '>
-        <ul typeof='none' className='flex flex-row absolute w-100 lg:gap-[300%] gap-[100%] lg:translate-x-[300%] translate-x-[50%] ' >
-        <li><a className='hover:text-green-800 transition-all duration-[800ms] text-xl' href={route('register')}>Register</a></li>
-        <li><a className='hover:text-green-800 transition-all duration-[800ms] text-xl' href={route('login')}>Login</a></li>       
+       <nav className='w-[100%] absolute mt-5 ' >
+        <ul typeof='none' className='flex flex-row absolute w-100 lg:gap-[340%] ul  gap-[100%] md:gap-[190%]  translate-x-[50%] ' >
+        <li>{ props.user? <a className='hover:text-green-800 transition-all duration-[800ms] text-xl' href={'/profile'}> {props.user.name}</a>  :
+            <a className='hover:text-green-800 transition-all duration-[800ms] text-xl' href={route('register')}>Register</a>}</li>
+        <li>{ props.user ?  <a className='hover:text-green-800 transition-all duration-[800ms] text-xl ' href={route('dashboard')}>Dashboard</a> :
+         <a className='hover:text-green-800 transition-all duration-[800ms] text-xl' href={route('login')}>Login</a>}</li>
+             
         </ul>        
        </nav>
     )
@@ -19,18 +22,18 @@ function Logo() {
 
 function Section1() {
     return (
-        <section className='absolute w-100 top-[20%] lg:left-[30%] grid grid-rows-2 gap-4  '>
-            <img src='./imgs/logo.png' width={300} height={300} className='relative  left-[20%]  rounded-[50%] mt-5 order-1'></img>
-            <img src='./imgs/sec1_img.png' className='relative  rounded-[64px]  order-2 lg:w-[800px] lg:left-[-10%] ' width={500} height={500}></img>
+        <section className=' absolute w-[100%]  grid grid-rows-2 gap-4 top-[20%]  sec1   '>
+            <img src='./imgs/logo.png' width={300} height={300} className='relative  md:left-[15%]  left-[25%] rounded-[50%] mt-5 '></img>
+            <div className='absolute md:left-[10%] left-[20%] top-[60%]'><h1 className=' text-6xl '>Welcome There</h1></div>
         </section>
     )
 }
 
 function Section3() {
     return (
-        <section className=' relative w-100 bg-white top-[20%] md:rounded-[32px]  ' style={{height:"50%"}}>
+        <section className=' relative w-[100%] bg-white top-[20%] md:rounded-[32px]  ' style={{height:"50%"  }}>
             <h4 className='text-blue-700 text-center text-3xl relative top-3'>Our Responsers</h4>
-            <div className='grid grid-cols-3    gap-3 relative left-[2%] lg:left-[10%] top-[5%] '>
+            <div className='grid grid-cols-3  bg-white   gap-3 relative top-[5%] '>
                <img src='./imgs/companylogo1.jpg' width={200}  className='rounded-[50%] object-fit '></img>
                <img src='./imgs/companylogo2.jpg'  width={200} className='rounded-[50%] object-fit self-center'></img>
                <img src='./imgs/company4logo.png' width={200}  className='rounded-[50%] object-fit '></img>
@@ -41,7 +44,8 @@ function Section3() {
 
 function Section2() {
     return (
-        <section className='w-100 absolute top-[150%] bg-white h-[200px] container'>
+        <section className=' absolute w-[100%] top-[100%] bg-white h-[200px] '
+         style={{backgroundImage:"linear-gradient(to bottom , rgba(62, 182, 153, 1) , rgba(66, 180, 205, 1) , rgba(60, 128, 178, 1) , rgba(54, 75, 152, 1))"}}>
             <article>
                 <h1 className='text-center text-6xl '>Welcome In Blogian</h1>
                 <h2 className='text-center text-xl text-blue-900'>Feel Free To Be Your Self</h2>
@@ -59,7 +63,7 @@ function Section2() {
 
 function Section4() {
     return (
-        <section className=' absolute top-[300%] container  ' style={{height:200}}>
+        <section className=' absolute top-[200%] w-[100%] ' style={{height:200}}>
             <div className='relative w-50 top-5   grid grid-cols-2 '> 
             <div className='relative w-50 flex flex-row gap-2 order-1'>
                 <div className='lg:translate-x-[30%]'><p className='text-center text-lg  ' style={{backgroundColor:"lightgray" , borderRadius:"16px"}}>How Are You ?</p></div>
@@ -78,14 +82,14 @@ function Section4() {
 
 export function Footer() {
     return (
-        <footer className=' absolute w-[100%] top-[340%] '>
-              <div className='relative w-100 bg-blue-900 x  grid grid-cols-2 gap-2 text-white'>
+        <footer className=' w-full absolute w-[100%] top-[240%] '>
+              <div className='relative w-100 bg-white  grid grid-cols-2 gap-2 text-black'>
                <div className='grid grid-rows-3 order-1'>
                 <a className='order-1' href={route("register")}>Register</a>
                 <a className='order-2' href={route("login")}>Login</a>
                 <a className='order-3' href="#">Blog</a>
                </div>
-               <div className='order-2 bg-blue-900  '>
+               <div className='order-2 bg-white  '>
                 <h4 className='text-start text-3xl'>
                     All Copy Rights Is Saved For Blogain
                 </h4>
@@ -99,13 +103,13 @@ export function Footer() {
 
 
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function Welcome({ auth, laravelVersion, phpVersion , user}) {
    
 
     return (
-      <div className='container'>
-        <header>
-            <Nav/>
+      <div className='w-[100%] ' >
+        <header className=' absolute w-[100%]  '>       
+            <Nav user={user}/>
            
         </header>
         <Section1/>

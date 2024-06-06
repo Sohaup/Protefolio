@@ -1,7 +1,7 @@
 html , body {
-    margin: 0px;
-    padding: 0px;
+    
     background-color: aliceblue;
+    background-image: linear-gradient(to bottom , rgba(62, 182, 153, 1) , rgba(66, 180, 205, 1) , rgba(60, 128, 178, 1) , rgba(54, 75, 152, 1));
     font-size: 19px;
     font-family:"" ;
     overflow-x: hidden
@@ -17,18 +17,17 @@ html , body {
 
 
 /* welcome  */
-
 .container {
     background-image: linear-gradient(to bottom , rgba(62, 182, 153, 1) , rgba(66, 180, 205, 1) , rgba(60, 128, 178, 1) , rgba(54, 75, 152, 1));
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden;
-    overflow:visible ;
-
 }
-@media(max-width:780px) {
-    .logo {
-       transform: translateX(10%);
-    }
+
+@media(min-width:600px) {
+   .ul {
+    position: absolute;
+    left: 15% !important;
+   }
+   .sec1 {
+    left:25% !important;
+   }
+   
 }
