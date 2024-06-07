@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\avatar_controller;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,7 +26,15 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $id = Auth::id();
+    $user = User::find($id);
+    if ($user->avatar) {
+    $avatar = $user->avatar;
+    return Inertia::render('Dashboard',['avatar'=>$avatar]);
+    }  else {
+        return Inertia::render('Dashboard');
+    }
+    
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -34,6 +43,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource("avatar", avatar_controller::class);
+Route::resource("avatar", avatar_controller::class)->names([
+    'store'=>'avatar_create',
+    'edit'=>'avatar_edit',
+    'update'=>'avatar_update',
+    'delete'=>'avatar_delete',
+    'create'=>'avatar_main'
+]);
+
 
 require __DIR__.'/auth.php';

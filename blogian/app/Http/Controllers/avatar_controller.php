@@ -6,6 +6,10 @@ use App\Models\avatar;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use Inertia\Inertia;
+
 class avatar_controller extends Controller
 {
     /**
@@ -21,7 +25,10 @@ class avatar_controller extends Controller
      */
     public function create()
     {
-        //
+        $id = Auth::id();
+        $user = User::find($id);
+        $avatar = $user->avatar;
+        return View('deleteAvatar',['avatar'=>$avatar]);
     }
 
     /**
@@ -32,9 +39,20 @@ class avatar_controller extends Controller
         $id = Auth::id();
         $user =  User::find($id);
         $request->validate([
-            'avatar'=>['required' , 'file' , 'mimes:jpg , jpeg , png']
+            'avatar'=>['required' , 'file' , 'mimes:jpg,jpeg,png']
         ]);
-        
+        $file = $request->file('avatar');
+        $path = $file->getClientOriginalName();
+        if (move_uploaded_file($file->getPathname() , public_path('avatars')."/".$path)) {
+            $avatar = new avatar();
+            $avatar->path = "/avatars".'/'.$path;
+            $avatar->user_id = $id;
+            $avatar->save();
+            return  redirect()->route('dashboard');
+        } else  {
+            return "Failed to Load File To Data Base";
+        }
+      
     }
 
     /**
@@ -50,15 +68,29 @@ class avatar_controller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $avatar = avatar::find($id);
+        
+        return view('editAvatar',['id'=>$id , 'avatar'=>$avatar]);
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'avatar'=>['required','file','mimes:jpg,jpeg,png']
+        ]);
+        $file = $request->file('avatar');
+        $path = $file->getClientOriginalName();
+        if (move_uploaded_file($file->getPathname() , public_path('avatars')."/".$path)) {
+        $avatar = avatar::find($id);
+        $avatar->path = "/avatars"."/".$path;
+        $avatar->save();
+        return redirect()->route('dashboard');
+        } else {
+            return "Failed To Update Avatar";
+        }
+        
     }
 
     /**
@@ -66,6 +98,15 @@ class avatar_controller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        
+        $avatar = avatar::find($id);
+       
+        if (unlink(public_path($avatar->path))) {            
+            avatar::find($id)->delete();
+            return redirect()->route('dashboard');
+        } else {
+            return  "Failed TO Delete Avatar";
+        }
+        
     }
 }

@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({ auth , avatar }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -20,12 +20,25 @@ export default function Dashboard({ auth }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 flex flex-row justify-around">
-                            Choose Your Avatar  
+                        {
+                            avatar?   
+                            <div className="p-6 text-gray-900 flex flex-row justify-around">                            
+                            <img src={avatar.path} width={80} height={80} className='rounded-[50%]'></img>  
+                            <button className=' w-[30%] bg-green-600 text-white text-lg w-[100px] h-[50px] rounded-[16px]' >
+                             <a href={route('avatar_edit',{'id':avatar.id})}>  Edit Avatar </a>
+                            </button>   
+                            <button className='w-[30%] bg-red-600 text-white text-lg w-[100px] h-[50px] rounded-[16px]' >
+                             <a href={route('avatar_main')}>  Delete Avatar </a>
+                            </button>                            
+                        </div>
+                        :
+                        <div className="p-6 text-gray-900 flex flex-row justify-around">                            
+                            <p>Choose Your Avatar {avatar}</p>  
                             <button className='bg-black text-white text-lg w-[100px] h-[50px] rounded-[16px]' >
                              <a href='/avatar'>  Choose </a>
-                            </button>
+                            </button>                            
                         </div>
+                        }
                     </div>
                 </div>
             </div>

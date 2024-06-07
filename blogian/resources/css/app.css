@@ -1,9 +1,10 @@
 html , body {
     
-    background-color: aliceblue;
+    background-color: midnightblue;
     background-image: linear-gradient(to bottom , rgba(62, 182, 153, 1) , rgba(66, 180, 205, 1) , rgba(60, 128, 178, 1) , rgba(54, 75, 152, 1));
     font-size: 19px;
     font-family:"" ;
+    color:white;
     overflow-x: hidden
 }  
 
