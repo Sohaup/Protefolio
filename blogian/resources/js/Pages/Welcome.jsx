@@ -4,15 +4,25 @@ import { Link, Head } from '@inertiajs/react';
 
 export function Nav(props) {
     return (
-       <nav className='w-[100%] absolute mt-5 ' >
-        <ul typeof='none' className='flex flex-row absolute w-100 lg:gap-[340%] ul   gap-[100%] md:gap-[190%]  translate-x-[50%] ' >
-        <li>{ props.user? <a className='hover:text-green-800 transition-all duration-[800ms] text-xl' href={'/profile'}> {props.user.name}</a>  :
-            <a className='hover:text-green-800 transition-all duration-[800ms] text-xl' href={route('register')}>Register</a>}</li>
-        <li>{ props.user ?  <a className='hover:text-green-800 transition-all duration-[800ms] text-xl relative lg:left-[140%]  ' href={route('dashboard')}>Dashboard</a> :
-         <a className='hover:text-green-800 transition-all duration-[800ms] text-xl relative lg:left-[350%]' href={route('login')}>Login</a>}</li>
-             
-        </ul>        
-       </nav>
+      <nav className='absolute w-[100%]  h-[50px]'>
+        <ul typeof='none' className='flex flex-row justify-around'>
+            <li>
+                {
+                    props.user?  
+                <a className='text-lg font-semibold font-mono transition-all duration-[800ms] hover:text-green-700' href='/profile'>{props.user.name}</a>
+                :<a className='text-lg font-semibold font-mono transition-all duration-[800ms] hover:text-green-700' href={route('register')}>Register</a>
+                }
+            </li>
+            <li>
+                {
+                    props.user?
+                <a className='text-lg font-semibold font-mono transition-all duration-[800ms] hover:text-green-700' href={route('dashboard')}>DashBoard</a>
+                : <a className='text-lg font-semibold font-mono transition-all duration-[800ms] hover:text-green-700' href={route('login')}>Login</a>
+                }
+            </li>
+            <li><a className='text-lg font-semibold font-mono transition-all duration-[800ms] hover:text-green-700' href={route('postspath.index')}>Blog</a></li>
+        </ul>
+      </nav>
     )
 }
 
@@ -22,9 +32,11 @@ function Logo() {
 
 function Section1() {
     return (
-        <section className=' absolute w-[100%]  grid grid-rows-2 gap-4 top-[20%]  sec1   '>
-            <img src='./imgs/logo.png' width={300} height={300} className='relative  md:left-[15%]  left-[25%] rounded-[50%] mt-5 '></img>
-            <div className='absolute md:left-[10%] left-[15%] top-[60%]'><h1 className=' text-6xl '>Welcome There</h1></div>
+        <section className='absolute w-[100%] h-[800px] top-[50px] bg-green-200 ' style={{backgroundImage:"linear-gradient(to bottom , rgba(62, 182, 153, 1) , rgba(66, 180, 205, 1) , rgba(60, 128, 178, 1) , rgba(54, 75, 152, 1))" , backgroundPosition:"center" , backgroundSize:"cover"}}>
+            <div className='flex flex-col items-center justify-center'>
+                <img src='/imgs/logo.png' className='img-thumnail md:w-[35%] sm:w-[40%] rounded-[50%] mt-5'/>
+                <h1 className='text-center text-white font-serif italic text-6xl absolute top-[70%] mt-[10%]  '>Welcome there</h1>
+            </div>
         </section>
     )
 }
@@ -44,7 +56,7 @@ function Section3() {
 
 function Section2() {
     return (
-        <section className=' absolute w-[100%] top-[120%]  h-[200px] bg-blue-900 '
+        <section className=' absolute w-[100%] top-[130%]  h-[200px]  md:top-[150%] '
          >
             <article>
                 <h1 className='text-center text-6xl text-white '>Welcome In Blogian</h1>
@@ -63,17 +75,18 @@ function Section2() {
 
 function Section4() {
     return (
-        <section className=' absolute top-[230%] w-[100%] ' style={{height:200}}>
-            <div className='relative w-50 top-5   grid grid-cols-2 '> 
-            <div className='relative w-50 flex flex-row gap-2 order-1'>
+        <section className=' absolute top-[240%] md:top-[260%] w-[100%] ' style={{height:200}}>
+            <div className='relative w-[100%] top-5   grid grid-cols-2 gap-[4%] justify-between '> 
+            <div className='relative w-[50%] flex flex-row  order-1  sm:ml-3 '>
                 <div className='lg:translate-x-[30%]'>
-                    <p className='text-center text-lg  ' style={{backgroundColor:"black" , borderRadius:"16px"}}>How Are You ?</p></div>
-                <img src='./imgs/human.png ' className='rounded-[50%] lg:translate-x-[80%]' width={50} height={50}></img>
+                    <p className='text-center text-lg w-[150px] h-[75px] ' style={{backgroundColor:"black" , borderRadius:"16px"}}>How Are You ?</p></div>
+                <img src='./imgs/human.png ' className='rounded-[50%] lg:translate-x-[80%] ms-3' width={50} height={50}></img>
             </div>
-            <div className='relative w-50 flex flex-row gap-2 order-2 '>
-                <div className='lg:translate-x-[170%]'>
-                    <p className='text-center text-lg bg-black rounded-[16px] ' >I Am Fine , Thanks</p></div>
-                <img src='./imgs/human.png ' className='rounded-[50%] lg:translate-x-[580%]' width={50} height={50}></img>
+
+            <div className='relative w-[50%] sm:left-[10%] md:translate-x-[60%] lg:translate-x-[90%]  flex flex-row gap-2 order-2 '>
+                <div className='relative '>
+                    <p className='text-center text-lg bg-black rounded-[16px] w-[150px] h-[75px] sm:justify-self-end' >I Am Fine , Thanks</p></div>
+                <img src='./imgs/human.png ' className='rounded-[50%] ' width={50} height={50}></img>
             </div>
 
             </div>
@@ -86,7 +99,7 @@ function Section4() {
 
 export function Footer() {
     return (
-        <footer className=' w-full absolute w-[100%] top-[260%] '>
+        <footer className=' w-full absolute w-[100%] top-[270%] md:top-[300%] '>
               <div className='relative w-100 bg-white  grid grid-cols-2 gap-2 text-black'>
                <div className='grid grid-rows-3 order-1'>
                 <a className='order-1' href={route("register")}>Register</a>

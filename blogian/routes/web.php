@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\avatar_controller;
+use App\Http\Controllers\Post_Controller;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+
 
 
 Route::get('/', function () {
@@ -51,5 +53,6 @@ Route::resource("avatar", avatar_controller::class)->names([
     'create'=>'avatar_main'
 ]);
 
+Route::resource("postspath",Post_Controller::class);
 
 require __DIR__.'/auth.php';

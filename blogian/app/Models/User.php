@@ -48,4 +48,7 @@ class User extends Authenticatable
     public function avatar() {
        return  $this->hasOne(avatar::class);
     }
+    public function post() {
+        return $this->hasMany(Post::class);
+    }
 }
