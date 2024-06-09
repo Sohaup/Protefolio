@@ -19,10 +19,11 @@ class Post_Controller extends Controller
         $posts = new Post();
         $postsData = $posts::all();
         if (Auth::check()) {
-          $id = Auth::id();
-          return view('blog' , ['posts'=>$postsData , 'user_id'=>$id]);  
+          $user = Auth::user();
+          return view('blog' , ['posts'=>$postsData ,'bool'=>true ,'user'=>$user]);  
+        } else {
+        return view('blog' , ['posts'=>$postsData , 'bool'=>false]);
         }
-        return view('blog' , ['posts'=>$postsData]);
     }
 
     /**
@@ -39,7 +40,7 @@ class Post_Controller extends Controller
     public function store(Request $request)
     {
        $request->validate([
-        'title'=>['required','string','max:50' , 'min:5'],
+        'title'=>['required','string','max:50' , 'min:2'],
         'img'=>['required','file','mimes:jpg,jpeg,png'],
         'content'=>['required','string','max:3000']
        ]);
@@ -70,7 +71,9 @@ class Post_Controller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('editPost',['post'=>$post]);
     }
 
     /**
@@ -78,7 +81,22 @@ class Post_Controller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title'=>['required','string', 'min:2','max:50'],
+            'img'=>['required','file','mimes:jpg,jpeg,png'],
+            'content'=>['required','string','max:3000']
+           ]);
+           $file = $request->file('img');
+           if (move_uploaded_file($file->getPathname() , public_path('posts')."/".$file->getClientOriginalName())) {
+            $post = Post::find($id);
+            $post->title = $request->input('title');
+            $post->img = "/posts"."/".$file->getClientOriginalName();
+            $post->content = $request['content'];            
+            $post->save();
+            return redirect()->route('postspath.index');
+           } else {
+           return "Failed To Publish The Post";
+           }
     }
 
     /**
@@ -86,6 +104,12 @@ class Post_Controller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::find($id);
+        if (unlink(public_path($post->img))) {
+            $post->delete();
+            return redirect()->route('postspath.index');
+        } else {
+            return "Failed To Delete Post";
+        }
     }
 }

@@ -99,14 +99,14 @@ function Section4() {
 
 export function Footer() {
     return (
-        <footer className=' w-full absolute w-[100%] top-[270%] md:top-[300%] '>
-              <div className='relative w-100 bg-white  grid grid-cols-2 gap-2 text-black'>
+        <footer className=' w-full absolute w-[100%] top-[270%] md:top-[300%] ' style={{backgroundColor:"midnightblue"}}>
+              <div className='relative w-100   grid grid-cols-2 gap-2 text-white' style={{backgroundColor:"midnightblue"}}>
                <div className='grid grid-rows-3 order-1'>
                 <a className='order-1' href={route("register")}>Register</a>
                 <a className='order-2' href={route("login")}>Login</a>
                 <a className='order-3' href="#">Blog</a>
                </div>
-               <div className='order-2 bg-white  '>
+               <div className='order-2   '>
                 <h4 className='text-start text-3xl'>
                     All Copy Rights Is Saved For Blogain
                 </h4>
