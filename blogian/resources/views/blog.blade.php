@@ -18,21 +18,24 @@
                         <div class="card-title text-center h1">{{$post->title}}</div>
                         <div class="card-img"><img src={{$post->img}} class="card-img"/></div>
                         <div class="card-text " @style(['font-family:sans-serif'])>{{$post->content}}</div>
-                        @if($bool)
+                      
                         <div class="card-body d-flex flex-row gap-3 justify-content-center">
                          <form action="/postspath/{{$post->id}}" method="POST">                            
                             @csrf
                             @method('DELETE')
-                          <button class="btn btn-dark"> Comment</button>
-                         <button class="btn btn-warning ">React</button>
+                          <button class="btn btn-dark comment" type="button"  id={{$post->id}}> Comment</button>
+                          @if($bool)
+                         <button class="btn btn-warning " type="button">React</button>
+                       
                          @if ($user->id == $post->user_id)
                          <button class="btn btn-success"><a href={{route('postspath.edit' , $post->id)}} @style(['text-decoration:none','color:white'])>Edit Post</a></button>                       
                            
                          <button class="btn btn-danger " type="submit">Delete Post</button>
                          </form>
-                         @endif                        
+                         @endif    
+                         @endif                                            
                         </div>
-                        @endif
+                       
                        
                     </div>
                 @empty

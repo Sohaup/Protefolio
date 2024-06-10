@@ -41,7 +41,7 @@ class Post_Controller extends Controller
     {
        $request->validate([
         'title'=>['required','string','max:50' , 'min:2'],
-        'img'=>['required','file','mimes:jpg,jpeg,png'],
+        'img'=>['required','file','mimes:jpg,jpeg,png,gif'],
         'content'=>['required','string','max:3000']
        ]);
        $file = $request->file('img');
@@ -83,7 +83,7 @@ class Post_Controller extends Controller
     {
         $request->validate([
             'title'=>['required','string', 'min:2','max:50'],
-            'img'=>['required','file','mimes:jpg,jpeg,png'],
+            'img'=>['required','file','mimes:jpg,jpeg,png,gif'],
             'content'=>['required','string','max:3000']
            ]);
            $file = $request->file('img');

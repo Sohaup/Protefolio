@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\avatar_controller;
+use App\Http\Controllers\Comment_Controller;
 use App\Http\Controllers\Post_Controller;
 use App\Http\Controllers\ProfileController;
 use App\Models\User;
@@ -54,5 +55,6 @@ Route::resource("avatar", avatar_controller::class)->names([
 ]);
 
 Route::resource("postspath",Post_Controller::class);
+Route::resource('comments',Comment_Controller::class);
 
 require __DIR__.'/auth.php';
