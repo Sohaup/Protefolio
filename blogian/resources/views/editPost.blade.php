@@ -14,7 +14,7 @@
         </div>
         <div class="col-12">
            <label for="title" class="form-label">Title</label>
-           <input name="title" type="text"  class="form-control" value={{$post->title}}/>
+           <input name="title" type="text"  class="form-control" value="{{$post->title}}"/>
            @error('title')
                <p class="text-danger">{{$message}}</p>
            @enderror

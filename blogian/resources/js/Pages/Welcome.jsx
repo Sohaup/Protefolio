@@ -32,7 +32,7 @@ function Logo() {
 
 function Section1() {
     return (
-        <section className='absolute w-[100%] h-[800px] top-[50px] bg-green-200 ' style={{backgroundImage:"linear-gradient(to bottom , rgba(62, 182, 153, 1) , rgba(66, 180, 205, 1) , rgba(60, 128, 178, 1) , rgba(54, 75, 152, 1))" , backgroundPosition:"center" , backgroundSize:"cover"}}>
+        <section className='absolute w-[100%] h-[800px] top-[50px]  ' >
             <div className='flex flex-col items-center justify-center'>
                 <img src='/imgs/logo.png' className='img-thumnail md:w-[35%] sm:w-[40%] rounded-[50%] mt-5'/>
                 <h1 className='text-center text-white font-serif italic text-6xl absolute top-[70%] mt-[10%]  '>Welcome there</h1>
@@ -43,12 +43,12 @@ function Section1() {
 
 function Section3() {
     return (
-        <section className=' relative w-[100%] bg-white top-[40%] md:rounded-[32px]  ' style={{height:"50%"  }}>
-            <h4 className='text-blue-700 text-center text-3xl relative top-3'>Our Responsers</h4>
-            <div className='grid grid-cols-3  bg-white   gap-3 relative top-[5%] '>
-               <img src='./imgs/companylogo1.jpg' width={200}  className='rounded-[50%] object-fit '></img>
-               <img src='./imgs/companylogo2.jpg'  width={200} className='rounded-[50%] object-fit self-center'></img>
-               <img src='./imgs/company4logo.png' width={200}  className='rounded-[50%] object-fit '></img>
+        <section className=' relative w-[100%] bg-white top-[40%] md:rounded-[32px]  ' style={{height:"50%"}}>
+            <h4 className='text-blue-700 text-center text-3xl relative top-3 lg:translate-x-[-3%]'>Our Responsers</h4>
+            <div className='grid grid-cols-3  bg-white   gap-[15%] relative top-[5%] '>
+               <img src='./imgs/companylogo1.jpg' width={200}  className='rounded-[50%] object-fit order-1 '></img>
+               <img src='./imgs/companylogo2.jpg'  width={200} className='rounded-[50%] object-fit self-center order-3'></img>
+               <img src='./imgs/company4logo.png' width={200}  className='rounded-[50%] object-fit order-5 '></img>
             </div>
         </section>
     )
@@ -56,8 +56,8 @@ function Section3() {
 
 function Section2() {
     return (
-        <section className=' absolute w-[100%] top-[130%]  h-[200px]  md:top-[150%] '
-         >
+        <section className=' absolute w-[100%] top-[130%]  h-[200px]  md:top-[150%] ' >
+         
             <article>
                 <h1 className='text-center text-6xl text-white '>Welcome In Blogian</h1>
                 <h2 className='text-center text-xl text-blue-900 text-white'>Feel Free To Be Your Self</h2>

@@ -12,9 +12,12 @@ class Post extends Model
     protected $table = 'posts';
     public $timestamps = false;
     public function user() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class);
     }
     public function comment() {
         return $this->hasMany(Comment::class);
+    }
+    public function replaycomment() {
+        return $this->hasMany(ReplayComments::class);
     }
 }

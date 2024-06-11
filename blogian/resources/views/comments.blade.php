@@ -5,13 +5,14 @@
         <div class="row ">
             <div class="col-12 ">
                 <section class="d-flex flex-column gap-3 w-75 position-absolute" @style(['max-height:600px','overflow-y:auto','right:0%'])>
-                   
-                    @forelse ($comments as $comment)                  
+                    
+                    @forelse ($comments as $comment)     
+                          
                       @if ($comment->post_id == $post_id)
                       <div class="d-flex flex-column gap-1">
                           <div class="d-flex flex-row gap-5">    
                             @if ($comment->user->avatar)
-                            <img src={{$comment->user->avatar->path}} class="img-thumbnail rounded-circle" width="50px" height="50px"/>
+                            <img src={{$comment->user->avatar->path}} class="img-fluid rounded-circle" width="50px" height="50px"/>
                             @else 
                             <img src="/imgs/human.png" class="img-thumbnail rounded-circle" width="50px" height="50px"/>  
                             @endif                    
@@ -28,17 +29,21 @@
                               
                              
                           </div>
+                          <form action="comments/{{$comment->id}}" method="POST">
+                            @csrf
+                            @method('DELETE')
                           <div class="d-flex flex-row gap-5 justify-content-around">
                                   <a class="text-dark " @style(['font-size:19px','text-decoration:none']) >Replay</a>
                               @if ($bool)
                                   <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
                               
                               @if ($comment->user_id == $user_id)
-                                  <a class="text-success " @style(['font-size:19px','text-decoration:none'])>Edit</a>
-                                  <a class="text-danger" @style(['font-size:19px','text-decoration:none'])>Delete</a>
+                                  <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('comments.edit',$comment->id)}}>Edit</a>
+                                  <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none']) value="Delete" type="submit" />
                               @endif
                               @endif
                          </div>
+                        </form>
                       </div>
                       <hr/>                     
                      

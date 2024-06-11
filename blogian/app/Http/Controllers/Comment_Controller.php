@@ -69,7 +69,8 @@ class Comment_Controller extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comment = Comment::find($id);
+        return view('editComment',['comment'=>$comment]);
     }
 
     /**
@@ -77,7 +78,13 @@ class Comment_Controller extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'content'=>['required','string','max:500','min:2']
+        ]);
+        $comment = Comment::find($id);
+        $comment->content = $request->input('content');
+        $comment->save();
+        return redirect()->route('comments.index',['post_id'=>$comment->post->id]);
     }
 
     /**
@@ -85,6 +92,9 @@ class Comment_Controller extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::find($id);
+        $post_id = $comment->post->id;
+        $comment->delete();
+        return redirect()->route('comments.index',['post_id'=>$post_id]);
     }
 }
