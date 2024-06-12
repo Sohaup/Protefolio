@@ -33,8 +33,9 @@
                             @csrf
                             @method('DELETE')
                           <div class="d-flex flex-row gap-5 justify-content-around">
-                                  <a class="text-dark " @style(['font-size:19px','text-decoration:none']) >Replay</a>
+                                 
                               @if ($bool)
+                              <a class="text-dark " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}} >Replay</a>
                                   <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
                               
                               @if ($comment->user_id == $user_id)
@@ -45,11 +46,59 @@
                          </div>
                         </form>
                       </div>
-                      <hr/>                     
                      
-               
+                     
+                   
                       
                       @endif
+                     @foreach ($replaycomments as $replaycomment)
+                  
+                     @if ($replaycomment->post_id == $post_id && $replaycomment->comment_id == $comment->id)
+                     <div class="d-flex flex-column gap-1">
+                        <div class="d-flex flex-row gap-5">    
+                          @if ($replaycomment->user->avatar)
+                          <img src={{$replaycomment->user->avatar->path}} class="img-fluid rounded-circle" width="50px" height="50px"/>
+                          @else 
+                          <img src="/imgs/human.png" class="img-thumbnail rounded-circle" width="50px" height="50px"/>  
+                          @endif                    
+                         
+                          
+                         
+                         
+                                                             
+                        </div>
+                        <div class="rounded-4 d-flex flex-column me-2"  @style(['background-color:darkgray' ,'height:auto','max-height:300'])>
+                            <p class="ps-2 " @style(['font-size:15px'])><span @style(['color:midnightblue'])> {{$comment->user->name}}</span> {{$replaycomment->content}}</p>                             
+                            <p class="justify-content-center d-flex flex-row gap-2" @style(['font-size:12px'])><span>Created By : <span @style(['color:crimson'])>{{$replaycomment->user->name}}</span></span> <span> Created At : <span @style(['color:midnightblue'])>{{$replaycomment->created_at}}</span></span></p>
+                           
+                            
+                           
+                        </div>
+                        <form action="replaycomments/{{$replaycomment->id}}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                        <div class="d-flex flex-row gap-5 justify-content-around">
+                               
+                            @if ($bool)                               
+                               <a class="text-dark replay  " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}}  id={{$replaycomment->id}}>Replay</a>                              
+                          
+                                <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
+                            
+                            @if ($replaycomment->user_id == $user_id)
+                                <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.edit',$replaycomment->id)}} >Edit</a>
+                                <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none']) value="Delete" type="submit" />
+                            @endif
+                            @endif
+                       </div>
+                      </form>
+                    </div>
+                       
+                  
+                     @endif
+                       
+                        
+                     @endforeach
+                       
                     @empty
                         <h1>The Comment Is Empty</h1>
                     

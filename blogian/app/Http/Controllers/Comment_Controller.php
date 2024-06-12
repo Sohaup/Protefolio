@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\ReplayComments;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,15 +20,14 @@ class Comment_Controller extends Controller
         $post_id = $request['post_id'];
         $comments = Comment::all();   
         $users = User::all();  
-      
+        $replaycomments = ReplayComments::all();
 
         
         if (Auth::check()) {
-          $id = Auth::id();
-         return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id ]);      
-                 
-        } else {
-           return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false ]);
+          $id = Auth::id();        
+            return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id,'replaycomments'=>$replaycomments  ]);         
+            } else {
+           return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false,'replaycomments'=>$replaycomments ]);
         }
     }
 
