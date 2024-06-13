@@ -47,6 +47,7 @@
                         </form>
                       </div>
                      
+
                      
                    
                       
@@ -80,7 +81,7 @@
                         <div class="d-flex flex-row gap-5 justify-content-around">
                                
                             @if ($bool)                               
-                               <a class="text-dark replay  " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}}  id={{$replaycomment->id}}>Replay</a>                              
+                               <a class="text-dark replay  " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id])}}  >Replay</a>                              
                           
                                 <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
                             
@@ -95,7 +96,57 @@
                        
                   
                      @endif
-                       
+                       @foreach ($lastreplaycomments as $lastreplaycomment)
+                           @if ($lastreplaycomment->post_id == $post_id && $comment->id == $lastreplaycomment->comment_id && $lastreplaycomment->replay_comment_id == $replaycomment->id)
+                           <div class="d-flex flex-column gap-1">
+                            <div class="d-flex flex-row gap-5">    
+                              @if ($lastreplaycomment->user->avatar)
+                              <img src={{$lastreplaycomment->user->avatar->path}} class="img-fluid rounded-circle" width="50px" height="50px"/>
+                              @else 
+                              <img src="/imgs/human.png" class="img-thumbnail rounded-circle" width="50px" height="50px"/>  
+                              @endif                    
+                             
+                              
+                             
+                             
+                                                                 
+                            </div>
+                            <div class="rounded-4 d-flex flex-column me-2"  @style(['background-color:black' ,'height:auto','max-height:300'])>
+                                <p class="ps-2 " @style(['font-size:15px','color:white'])>
+                                  
+                                       @foreach ($users as $user)
+                                           @if ($user->id == $lastreplaycomment->replay_user_id)
+                                           <span @style(['color:powderblue'])> {{$user->name}}</span> 
+                                           @endif
+                                       @endforeach
+                                 
+                                    
+                                    {{$lastreplaycomment->content}}</p>                             
+                                <p class="justify-content-center d-flex flex-row gap-2" @style(['font-size:12px','color:white'])><span>Created By : <span @style(['color:crimson'])>{{$lastreplaycomment->user->name}}</span></span> <span> Created At : <span @style(['color:powderblue'])>{{$replaycomment->created_at}}</span></span></p>
+                               
+                                
+                               
+                            </div>
+                            <form action="lastreplaycomments/{{$lastreplaycomment->id}}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                            <div class="d-flex flex-row gap-5 justify-content-around">
+                                   
+                                @if ($bool)                               
+                                   <a class="text-dark replay " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id , 'replay_user_id'=>$lastreplaycomment->user_id])}}>Replay</a>                              
+                              
+                                    <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
+                                
+                                @if ($lastreplaycomment->user_id == $user_id)
+                                    <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.edit',$lastreplaycomment->id)}} >Edit</a>
+                                    <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none']) value="Delete" type="submit" />
+                                @endif
+                                @endif
+                           </div>
+                          </form>
+                        </div>
+                           @endif
+                       @endforeach
                         
                      @endforeach
                        

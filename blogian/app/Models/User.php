@@ -57,4 +57,7 @@ class User extends Authenticatable
     public function replaycomment() {
         return $this->hasMany(ReplayComments::class);
     }
+    public function lastreplaycomment() {
+        return $this->hasMany(ReplayComments::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Last_Replay_Comment;
 use App\Models\ReplayComments;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,13 +22,13 @@ class Comment_Controller extends Controller
         $comments = Comment::all();   
         $users = User::all();  
         $replaycomments = ReplayComments::all();
-
+        $lastreplaycomments = Last_Replay_Comment::all();
         
         if (Auth::check()) {
           $id = Auth::id();        
-            return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id,'replaycomments'=>$replaycomments  ]);         
+            return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id,'replaycomments'=>$replaycomments ,'lastreplaycomments'=>$lastreplaycomments ]);         
             } else {
-           return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false,'replaycomments'=>$replaycomments ]);
+           return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false,'replaycomments'=>$replaycomments,'lastreplaycomments'=>$lastreplaycomments ]);
         }
     }
 

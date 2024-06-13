@@ -20,4 +20,7 @@ class Post extends Model
     public function replaycomment() {
         return $this->hasMany(ReplayComments::class);
     }
+    public function lastreplaycomment() {
+        return $this->hasMany(Last_Replay_Comment::class);
+    }
 }

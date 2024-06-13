@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\avatar_controller;
 use App\Http\Controllers\Comment_Controller;
+use App\Http\Controllers\Last_Replay_Comment_Controller;
 use App\Http\Controllers\Post_Controller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Replay_Comments_Controller;
@@ -58,5 +59,5 @@ Route::resource("avatar", avatar_controller::class)->names([
 Route::resource("postspath",Post_Controller::class);
 Route::resource('comments',Comment_Controller::class);
 Route::resource('replaycomments',Replay_Comments_Controller::class);
-
+Route::resource('lastreplaycomments',Last_Replay_Comment_Controller::class);
 require __DIR__.'/auth.php';
