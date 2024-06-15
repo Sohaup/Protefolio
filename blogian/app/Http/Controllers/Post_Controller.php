@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Post_Reacts;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -16,13 +17,15 @@ class Post_Controller extends Controller
      */
     public function index()
     {
-        $posts = new Post();
-        $postsData = $posts::all();
+        //$posts = new Post();
+        $postsData = Post::all();
+        $postreacts = Post_Reacts::all();
+        //dd($postreacts);
         if (Auth::check()) {
           $user = Auth::user();
-          return view('blog' , ['posts'=>$postsData ,'bool'=>true ,'user'=>$user]);  
+          return view('blog' , ['posts'=>$postsData ,'bool'=>true ,'user'=>$user , 'postreacts'=>$postreacts]);  
         } else {
-        return view('blog' , ['posts'=>$postsData , 'bool'=>false]);
+        return view('blog' , ['posts'=>$postsData , 'bool'=>false , 'postreacts'=>$postreacts]);
         }
     }
 
@@ -111,5 +114,6 @@ class Post_Controller extends Controller
         } else {
             return "Failed To Delete Post";
         }
+      
     }
 }

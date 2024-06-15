@@ -9,6 +9,7 @@ class Post extends Model
 {
     use HasFactory;
     protected $fillables = ['title','img','content','user_id'];
+
     protected $table = 'posts';
     public $timestamps = false;
     public function user() {
@@ -22,5 +23,8 @@ class Post extends Model
     }
     public function lastreplaycomment() {
         return $this->hasMany(Last_Replay_Comment::class);
+    }
+    public function postreact() {
+        return $this->hasMany(Post_Reacts::class);
     }
 }

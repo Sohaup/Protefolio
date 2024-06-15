@@ -1,5 +1,18 @@
 @extends('main')
+@php
+  function Find($id , $arr , $val) {
+    $found = false;
+    foreach ($arr as $index => $postreact) {
+       if ($postreact->post_id == $id) {
+        $found = true;       
+        return $postreact->$val;
+        break;
+       }
+    }
+  }
 
+  #Find(12 , $postreacts);
+@endphp
 <div class="container">
     <main>
         <div class="row">
@@ -25,15 +38,32 @@
                             @method('DELETE')
                           <button class="btn btn-dark comment" type="button"  id={{$post->id}}> Comment</button>
                           @if($bool)
-                         <button class="btn btn-warning " type="button">React</button>
+                        <select class="form-select btn btn-outline-warning bg-light text-center rounded-2 text-dark react" @style(['width:100px']) id={{$post->id}} role={{Find($post->id , $postreacts , 'id')}}>
+                                                          
+                            
+                             @if (Find($post->id , $postreacts , 'value'))
+                                <option class="react_update" selected> {{Find($post->id , $postreacts , 'value')}}</option>
+                             @else
+                                 <option class="react_insert" selected>React</option>
+                             @endif
+                             
+                            <option class="love">&#128151</option>
+                            <option class="support">&#128525</option>
+                            <option class="like" >&#X1F44D</option>
+                            <option class="happy">&#128514</option>
+                            <option class="sad">&#128549</option>
+                            <option class="confused">&#128531</option>
+                            <option class="trash bg-danger">Delete</option>
+                        </select>
                        
                          @if ($user->id == $post->user_id)
                          <button class="btn btn-success"><a href={{route('postspath.edit' , $post->id)}} @style(['text-decoration:none','color:white'])>Edit Post</a></button>                       
                            
                          <button class="btn btn-danger " type="submit">Delete Post</button>
-                         </form>
+                        
                          @endif    
-                         @endif                                            
+                         @endif    
+                        </form>                                        
                         </div>
                        
                        

@@ -60,4 +60,7 @@ class User extends Authenticatable
     public function lastreplaycomment() {
         return $this->hasMany(ReplayComments::class);
     }
+    public function post_replay() {
+        return $this->hasMany(Post_Reacts::class);
+    }
 }
