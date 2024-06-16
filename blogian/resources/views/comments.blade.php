@@ -1,10 +1,22 @@
 @extends('main')
+@php
+  function Find_Comment_React($id , $arr , $val , $user_id , $comment_id) {
+   
+    foreach ($arr as $index => $commentreact) {
+       if ($commentreact->post_id == $id && $user_id == $commentreact->user_id && $commentreact->comment_id == $comment_id) {            
+        return $commentreact->$val;
+        break;
+       }
+    }
+  }
 
+  
+@endphp
 <div class="container  ">
     <main>
         <div class="row ">
             <div class="col-12 ">
-                <section class="d-flex flex-column gap-3 w-75 position-absolute" @style(['max-height:600px','overflow-y:auto','right:0%'])>
+                <section class="d-flex flex-column gap-3 w-100 position-absolute comment" @style(['max-height:600px','overflow-y:auto','right:0%']) role={{$post_id}}>
                     
                     @forelse ($comments as $comment)     
                           
@@ -35,12 +47,25 @@
                           <div class="d-flex flex-row gap-5 justify-content-around">
                                  
                               @if ($bool)
-                              <a class="text-dark " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}} >Replay</a>
-                                  <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
+                              <a class="text-dark  " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}} >Replay</a>
+                                  <select class="form-select text-warning comment_react" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) id={{$comment->id}} role={{Find_Comment_React($post_id , $commentreacts , 'id' , $user_id , $comment->id)}} >
+                                    @if (Find_Comment_React($post_id , $commentreacts , 'value' , $user_id , $comment->id))
+                                    <option selected class="text-warning m-0">{{Find_Comment_React($post_id , $commentreacts , 'value' , $user_id , $comment->id)}}</option>
+                                    @else
+                                    <option selected class="text-warning m-0">React</option>
+                                    @endif
+                                    <option>&#128151</option>
+                                    <option>&#128525</option>
+                                    <option>&#X1F44D</option>
+                                    <option>&#128514</option>
+                                    <option>&#128549</option>
+                                    <option>&#128531</option>
+                                    <option class="text-danger trash" >Delete</option>                                    
+                                  </select> 
                               
                               @if ($comment->user_id == $user_id)
-                                  <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('comments.edit',$comment->id)}}>Edit</a>
-                                  <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none']) value="Delete" type="submit" />
+                                  <a class="text-success " @style(['font-size:19px','text-decoration:none',]) href={{route('comments.edit',$comment->id)}}>Edit</a>
+                                  <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none',]) value="Delete" type="submit" />
                               @endif
                               @endif
                          </div>

@@ -1,17 +1,16 @@
 @extends('main')
 @php
-  function Find($id , $arr , $val) {
-    $found = false;
+  function Find($id , $arr , $val , $user) {
+   
     foreach ($arr as $index => $postreact) {
-       if ($postreact->post_id == $id) {
-        $found = true;       
+       if ($postreact->post_id == $id && $user->id == $postreact->user_id) {            
         return $postreact->$val;
         break;
        }
     }
   }
 
-  #Find(12 , $postreacts);
+  
 @endphp
 <div class="container">
     <main>
@@ -38,11 +37,11 @@
                             @method('DELETE')
                           <button class="btn btn-dark comment" type="button"  id={{$post->id}}> Comment</button>
                           @if($bool)
-                        <select class="form-select btn btn-outline-warning bg-light text-center rounded-2 text-dark react" @style(['width:100px']) id={{$post->id}} role={{Find($post->id , $postreacts , 'id')}}>
+                        <select class="form-select btn btn-outline-warning bg-light text-center rounded-2 text-dark react" @style(['width:100px']) id={{$post->id}} role={{Find($post->id , $postreacts , 'id',$user)}}>
                                                           
                             
-                             @if (Find($post->id , $postreacts , 'value'))
-                                <option class="react_update" selected> {{Find($post->id , $postreacts , 'value')}}</option>
+                             @if (Find($post->id , $postreacts , 'value',$user))
+                                <option class="react_update" selected> {{Find($post->id , $postreacts , 'value',$user)}}</option>
                              @else
                                  <option class="react_insert" selected>React</option>
                              @endif

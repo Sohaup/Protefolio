@@ -14,7 +14,7 @@ class Post_Reacts_Controller extends Controller
      */
     public function index(Request $request)
     {
-       $react_container = []; 
+       #$react_container = []; 
       if ($request['status'] == 'insert') {    
        $reacts = Post_Reacts::all();
        DB::delete("DELETE FROM postreacts Where post_id = ?" , [$request['post_id']]);

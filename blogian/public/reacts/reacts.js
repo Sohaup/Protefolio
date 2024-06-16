@@ -7,9 +7,7 @@ comments_btn[i].addEventListener('click',()=>{
     window.open('http://127.0.0.1:8000/comments?post_id='+id,'comment',['width:300px','height:300px']);    
 })
 }
-// insert or update logic
-const react_inserts = document.getElementsByClassName("react_insert");
-const react_updates = document.getElementsByClassName("react_update");
+
 
 // access required elements
 const reacts = document.getElementsByClassName("react")
@@ -43,7 +41,7 @@ reacts[i].addEventListener("change",()=>{
     } else {
         status = "delete";
         const react_id = reacts[i].role;
-        console.log(react_id);
+        //console.log(react_id);
         $.ajax({
             url:"/postreacts?react_id="+react_id+"&status="+status,
             method:"GET",
@@ -58,17 +56,3 @@ reacts[i].addEventListener("change",()=>{
 })
 }
 
-/*for (let i=0 ; i<reacts.length ; i++) {
-    const post_id = reacts[i].id;
-   
-    const status = "update";
-reacts[i].addEventListener("change",()=>{
-    const value = reacts[i].value;
-    if (reacts[i].value == "" + love + ""  || reacts[i].value == "" + like + "" || reacts[i].value == "" + sad + "" || reacts[i].value == "" + happy + "" || reacts[i].value == "" + support + "" || reacts[i].value == "" + confused + "") {
-        reacts[i].addEventListener("change" , ()=>{
-            console.log(reacts[i].value)
-        })
-    } 
-})
-}*/
-    

@@ -27,4 +27,7 @@ class Post extends Model
     public function postreact() {
         return $this->hasMany(Post_Reacts::class);
     }
+    public function commentreact() {
+        return $this->hasMany(Comment_React::class);
+    }
 }

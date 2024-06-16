@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\avatar_controller;
 use App\Http\Controllers\Comment_Controller;
+use App\Http\Controllers\Comment_Reacts_Controller;
 use App\Http\Controllers\Last_Replay_Comment_Controller;
 use App\Http\Controllers\Post_Controller;
 use App\Http\Controllers\Post_Reacts_Controller;
@@ -63,4 +64,5 @@ Route::resource('comments',Comment_Controller::class);
 Route::resource('replaycomments',Replay_Comments_Controller::class);
 Route::resource('lastreplaycomments',Last_Replay_Comment_Controller::class);
 Route::apiResource('postreacts',Post_Reacts_Controller::class)->middleware(CORS_Middleware::class);
+Route::get('commentreacts' ,[Comment_Reacts_Controller::class , 'comment_reacts' ]);
 require __DIR__.'/auth.php';
