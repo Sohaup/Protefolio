@@ -35,9 +35,9 @@
                          <form action="/postspath/{{$post->id}}" method="POST">                            
                             @csrf
                             @method('DELETE')
-                          <button class="btn btn-dark comment" type="button"  id={{$post->id}}> Comment</button>
+                          <button class="btn btn-dark comment" type="button" onclick="handleClick({{$post->id}})"   > Comment</button>
                           @if($bool)
-                        <select class="form-select btn btn-outline-warning bg-light text-center rounded-2 text-dark react" @style(['width:100px']) id={{$post->id}} role={{Find($post->id , $postreacts , 'id',$user)}}>
+                        <select class="form-select btn btn-outline-warning bg-light text-center rounded-2 react text-warning" @style(['width:100px','font-size:18px']) onchange="handleChange(this , {{$post->id}} , {{Find($post->id , $postreacts , 'id',$user)}})" >
                                                           
                             
                              @if (Find($post->id , $postreacts , 'value',$user))

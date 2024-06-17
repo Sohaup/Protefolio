@@ -30,4 +30,7 @@ class Post extends Model
     public function commentreact() {
         return $this->hasMany(Comment_React::class);
     }
+    public function replaycommentreact() {
+        return $this->hasMany(Replay_Comment_React::class);
+    } 
 }

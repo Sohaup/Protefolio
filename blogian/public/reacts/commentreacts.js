@@ -1,15 +1,13 @@
 const comment_reacts = document.getElementsByClassName("comment_react")
 const trash = document.getElementsByClassName('trash')[0].textContent
 
-
-for (let i=0 ; i<comment_reacts.length ; i++) {
-    const post_id = document.getElementsByClassName('comment')[0].role;
-    const comment_id = comment_reacts[i].id;
+// comment reacts
+function handleChange(element , post_id , comment_id , react_id) {
     let status = "insert";
-comment_reacts[i].addEventListener("change",()=>{
-    const value = comment_reacts[i].value;
+
+    const value = element.value ;
     
-    if ( comment_reacts[i].value != "React"  && comment_reacts[i].value != trash) {
+    if ( value != "React"  && value != trash) {
         $.ajax({
             url:"/commentreacts?post_id="+post_id+"&value="+value+"&status="+status+"&comment_id="+comment_id,
             method:"GET",
@@ -21,11 +19,10 @@ comment_reacts[i].addEventListener("change",()=>{
             }
         })
     } else {
-        status = "delete";
-        const react_id = comment_reacts[i].role;
-        //console.log(react_id);
+        status = "delete";    
+       
         $.ajax({
-            url:"/commentreacts?react_id="+react_id+"&status="+status,
+            url:"/commentreactsdelete?react_id="+react_id+"&status="+status,
             method:"GET",
             success:function(response) {
                 console.log(response)
@@ -35,5 +32,36 @@ comment_reacts[i].addEventListener("change",()=>{
             }
         })
     }
+}
+
+
+// replay comments reacts
+function handleReact(element , post_id , comment_id , replay_comment_id , react_id) {
+const value = element.value;
+let status = "insert";
+if (value != trash && value != "React") {
+
+$.ajax({
+    url:"/replaycommentreacts?value="+value+"&post_id="+post_id+"&comment_id="+comment_id+"&replay_comment_id="+replay_comment_id+"&status="+status,
+    method:"GET",
+    success:function (result) {
+        console.log(result)
+    },
+    error:function (error) {
+        console.log("Insert react Failed Because "+err)
+    }
 })
+} else {
+    status = "delete";
+    $.ajax({
+        url:"/replaycommentreactsdelete?status="+status+"&react_id="+react_id ,
+        method:"GET",
+        success:(result)=>{
+            console.log(result)
+        },
+        error:(error)=>{
+            console.log("failed because of"+error)
+        }
+    })
+}
 }

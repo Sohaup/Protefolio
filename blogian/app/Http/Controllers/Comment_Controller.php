@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Comment_React;
 use App\Models\Last_Replay_Comment;
+use App\Models\Replay_Comment_React;
 use App\Models\ReplayComments;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,11 +26,12 @@ class Comment_Controller extends Controller
         $replaycomments = ReplayComments::all();
         $lastreplaycomments = Last_Replay_Comment::all();
         $commentreacts = Comment_React::all();
+        $replaycommentreacts = Replay_Comment_React::all();
         if (Auth::check()) {
           $id = Auth::id();        
-            return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id,'replaycomments'=>$replaycomments ,'lastreplaycomments'=>$lastreplaycomments ,'commentreacts'=>$commentreacts]);         
+            return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id,'replaycomments'=>$replaycomments ,'lastreplaycomments'=>$lastreplaycomments ,'commentreacts'=>$commentreacts , 'replaycommentreacts'=>$replaycommentreacts]);         
             } else {
-           return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false,'replaycomments'=>$replaycomments,'lastreplaycomments'=>$lastreplaycomments , 'commentreacts' => $commentreacts]);
+           return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false,'replaycomments'=>$replaycomments,'lastreplaycomments'=>$lastreplaycomments , 'commentreacts' => $commentreacts , 'replaycommentreacts'=>$replaycommentreacts]);
         }
     }
 

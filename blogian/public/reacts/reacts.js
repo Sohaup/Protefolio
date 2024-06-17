@@ -1,12 +1,10 @@
 
 
-const comments_btn = document.getElementsByClassName('comment');
-for (let i=0;i<comments_btn.length;i++) {
-    const id = comments_btn[i].id;
-comments_btn[i].addEventListener('click',()=>{
-    window.open('http://127.0.0.1:8000/comments?post_id='+id,'comment',['width:300px','height:300px']);    
-})
-}
+// open comments Window
+function handleClick(post_id) {   
+        const id = post_id;    
+        window.open('http://127.0.0.1:8000/comments?post_id='+id,'comment',['width:300px','height:300px']); 
+    }
 
 
 // access required elements
@@ -18,16 +16,15 @@ const sad = document.getElementsByClassName("sad")[0].textContent
 const happy = document.getElementsByClassName("happy")[0].textContent
 const confused = document.getElementsByClassName("confused")[0].textContent
 const trash = document.getElementsByClassName("trash")[0].textContent
-// insert action
 
-for (let i=0 ; i<reacts.length ; i++) {
-    const post_id = reacts[i].id;
+// post react
+
+function handleChange(element , post_id , react_id) {  
    
     let status = "insert";
-reacts[i].addEventListener("change",()=>{
-    const value = reacts[i].value;
+    const value = element.value;
     
-    if ( reacts[i].value != "React"  && reacts[i].value != trash) {
+    if ( value != "React"  && value != trash) {
         $.ajax({
             url:"/postreacts?post_id="+post_id+"&value="+value+"&status="+status,
             method:"GET",
@@ -39,9 +36,8 @@ reacts[i].addEventListener("change",()=>{
             }
         })
     } else {
-        status = "delete";
-        const react_id = reacts[i].role;
-        //console.log(react_id);
+        status = "delete";       
+        
         $.ajax({
             url:"/postreacts?react_id="+react_id+"&status="+status,
             method:"GET",
@@ -53,6 +49,5 @@ reacts[i].addEventListener("change",()=>{
             }
         })
     }
-})
-}
 
+}

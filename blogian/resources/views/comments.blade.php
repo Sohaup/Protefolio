@@ -10,8 +10,26 @@
     }
   }
 
+ 
   
 @endphp
+
+@php
+  function Find_Replay_Comment_React($id , $arr , $val , $user_id , $comment_id , $replay_comment_id) {
+    foreach ($arr as $index => $react) {     
+     if ( $react->user_id == $user_id && $react->post_id == $id && $react->comment_id == $comment_id && $react->replay_comment_id == $replay_comment_id) {
+       return $react->$val;
+       break;
+     }
+   }
+  }
+
+ 
+  
+@endphp
+
+
+
 <div class="container  ">
     <main>
         <div class="row ">
@@ -48,7 +66,7 @@
                                  
                               @if ($bool)
                               <a class="text-dark  " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}} >Replay</a>
-                                  <select class="form-select text-warning comment_react" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) id={{$comment->id}} role={{Find_Comment_React($post_id , $commentreacts , 'id' , $user_id , $comment->id)}} >
+                                  <select class="form-select text-warning comment_react" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) onchange="handleChange(this , {{$post_id}} , {{$comment->id}} , {{Find_Comment_React($post_id , $commentreacts , 'id' , $user_id , $comment->id)}})" id={{$comment->id}} role={{Find_Comment_React($post_id , $commentreacts , 'id' , $user_id , $comment->id)}} >
                                     @if (Find_Comment_React($post_id , $commentreacts , 'value' , $user_id , $comment->id))
                                     <option selected class="text-warning m-0">{{Find_Comment_React($post_id , $commentreacts , 'value' , $user_id , $comment->id)}}</option>
                                     @else
@@ -108,7 +126,20 @@
                             @if ($bool)                               
                                <a class="text-dark replay  " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id])}}  >Replay</a>                              
                           
-                                <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
+                               <select class="form-select text-warning" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) onchange="handleReact(this , {{$post_id}} , {{$comment->id}} , {{$replaycomment->id}} , {{Find_Replay_Comment_React($post_id , $replaycommentreacts , 'id' ,$user_id ,$comment->id , $replaycomment->id)}})">
+                                @if (Find_Replay_Comment_React($post_id , $replaycommentreacts , 'value' ,$user_id ,$comment->id , $replaycomment->id))
+                                    <option selected>{{Find_Replay_Comment_React($post_id , $replaycommentreacts , 'value' ,$user_id ,$comment->id , $replaycomment->id)}}</option>
+                                @else
+                                    <option selected>React</option>
+                                @endif
+                                <option>&#128151</option>
+                                <option>&#128525</option>
+                                <option>&#X1F44D</option>
+                                <option>&#128514</option>
+                                <option>&#128549</option>
+                                <option>&#128531</option>
+                                <option class="text-danger">Delete</option>
+                                </select> 
                             
                             @if ($replaycomment->user_id == $user_id)
                                 <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.edit',$replaycomment->id)}} >Edit</a>

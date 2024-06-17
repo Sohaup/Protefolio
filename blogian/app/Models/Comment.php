@@ -23,4 +23,7 @@ class Comment extends Model
     public function lastreplaycomment() {
         return $this->hasMany(Last_Replay_Comment::class);
     }
+    public function replaycommentreact() {
+        return $this->hasMany(Replay_Comment_React::class);
+    }
 }

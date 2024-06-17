@@ -19,13 +19,22 @@ class Comment_Reacts_Controller extends Controller
             $comment_react->comment_id = $request['comment_id'];
             $comment_react->save();
             return "Response Success post_id : ".$request['post_id']."status : ".$request['status']." value: ".$request['value']."comment_id :".$request['comment_id'];
-        } else if ($request['status'] == 'delete') {
+        } /*else if ($request['status'] == 'delete') {
+            if ($request['react_id']) {
+                $react = Comment_React::find($request['react_id'])->delete();
+                return "deleted Successfuly ".$request['react_id'];
+            }
+            
+          }*/
+ 
+    }
+    public function delete_comment_reacts(Request $request) {
+        if ($request['status'] == 'delete') {
             if ($request['react_id']) {
                 $react = Comment_React::find($request['react_id'])->delete();
                 return "deleted Successfuly ".$request['react_id'];
             }
             
           }
- 
     }
 }
