@@ -65,3 +65,32 @@ $.ajax({
     })
 }
 }
+// last replay comment reacts
+function handle_Last_React(element , post_id , comment_id , replay_comment_id , last_replay_comment_id , react_id) {
+const value = element.value;
+let status = "insert" 
+if (value != trash && value != "React") {
+$.ajax({
+    url:"/lastreplaycommentreacts?status="+status+"&value="+value+"&post_id="+post_id+"&comment_id="+comment_id+"&replay_comment_id="+replay_comment_id+"&last_replay_comment_id="+last_replay_comment_id,
+    method:"GET",
+    success:(response)=>{
+        console.log(response)
+    },
+    error:(err)=>{
+        console.log("Failed Because Of "+err)
+    }
+})
+} else {
+    status = "delete"
+    $.ajax({
+        url:"/lastreplaycommentreactdelete?status="+status+"&react_id="+react_id,
+        method:"GET",
+        success:(response)=>{
+            console.log(response)
+        },
+        error:(err)=>{
+            console.log(err)
+        }
+    })
+}
+}

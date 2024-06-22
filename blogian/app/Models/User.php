@@ -69,4 +69,7 @@ class User extends Authenticatable
     public function replay_comment_react() {
         return $this->hasMany(Replay_Comment_React::class);
     }
+    public function last_replay_comment_react() {
+        return $this->hasMany(Last_Replay_Comment_React::class);
+    }
 }

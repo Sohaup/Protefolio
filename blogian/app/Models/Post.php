@@ -27,10 +27,13 @@ class Post extends Model
     public function postreact() {
         return $this->hasMany(Post_Reacts::class);
     }
-    public function commentreact() {
+    public function comment_react() {
         return $this->hasMany(Comment_React::class);
     }
-    public function replaycommentreact() {
+    public function replay_comment_react() {
         return $this->hasMany(Replay_Comment_React::class);
     } 
+    public function last_replay_comment_react() {
+        return $this->hasMany(Last_Replay_Comment_React::class);
+    }
 }

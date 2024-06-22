@@ -17,13 +17,16 @@ class Comment extends Model
     public function post() {
         return $this->belongsTo(Post::class);
     }
-    public function replaycomment() {
+    public function replay_comment() {
         return $this->hasMany(ReplayComments::class);
     }
-    public function lastreplaycomment() {
+    public function last_replay_comment() {
         return $this->hasMany(Last_Replay_Comment::class);
     }
-    public function replaycommentreact() {
+    public function replay_comment_react() {
         return $this->hasMany(Replay_Comment_React::class);
     }
+   public function last_replay_comment_react() {
+        return $this->hasMany(Replay_Comment_React::class);
+   }
 }

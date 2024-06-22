@@ -4,6 +4,7 @@ use App\Http\Controllers\avatar_controller;
 use App\Http\Controllers\Comment_Controller;
 use App\Http\Controllers\Comment_Reacts_Controller;
 use App\Http\Controllers\Last_Replay_Comment_Controller;
+use App\Http\Controllers\Last_Replay_Comment_Reacts_Controller;
 use App\Http\Controllers\Post_Controller;
 use App\Http\Controllers\Post_Reacts_Controller;
 use App\Http\Controllers\ProfileController;
@@ -70,5 +71,6 @@ Route::get('commentreacts' ,[Comment_Reacts_Controller::class , 'comment_reacts'
 Route::get('commentreactsdelete' , [Comment_Reacts_Controller::class , 'delete_comment_reacts']);
 Route::get('replaycommentreacts',[Replay_Comment_Reacts_Controller::class , 'reacts']);
 Route::get('replaycommentreactsdelete' , [Replay_Comment_Reacts_Controller::class , 'delete_reacts']);
-
+Route::get('lastreplaycommentreacts' , [Last_Replay_Comment_Reacts_Controller::class , 'insert_react']);
+Route::get('lastreplaycommentreactdelete' , [Last_Replay_Comment_Reacts_Controller::class , 'delete_react']);
 require __DIR__.'/auth.php';

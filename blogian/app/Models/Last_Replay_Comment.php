@@ -24,4 +24,7 @@ class Last_Replay_Comment extends Model
     public function replaycomment() {
         return $this->belongsTo(ReplayComments::class);
     }
+    public function last_replay_comment_react() {
+        return $this->hasMany(Last_Replay_Comment_React::class);
+    }
 }

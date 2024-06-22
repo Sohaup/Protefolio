@@ -28,6 +28,20 @@
   
 @endphp
 
+@php
+  function Find_Last_Replay_Comment_React($id , $arr , $val , $user_id , $comment_id , $replay_comment_id , $last_replay_comment_id) {
+    foreach ($arr as $index => $react) {     
+     if ( $react->user_id == $user_id && $react->post_id == $id && $react->comment_id == $comment_id && $react->replay_comment_id == $replay_comment_id && $react->last_replay_comment_id == $last_replay_comment_id) {
+       return $react->$val;
+       break;
+     }
+   }
+  }
+
+ 
+  
+@endphp
+
 
 
 <div class="container  ">
@@ -191,7 +205,21 @@
                                 @if ($bool)                               
                                    <a class="text-dark replay " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id , 'replay_user_id'=>$lastreplaycomment->user_id])}}>Replay</a>                              
                               
-                                    <a class="text-warning" @style(['font-size:19px','text-decoration:none'])>React</a>
+                                   <select class="form-select text-warning" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) onchange="handle_Last_React(this , {{$post_id}} , {{$comment->id}} , {{$replaycomment->id}} ,  {{$lastreplaycomment->id}} , {{Find_Last_Replay_Comment_React($post_id , $lastreplaycommentreacts , 'id' ,$user_id ,$comment->id , $replaycomment->id , $lastreplaycomment->id)}}  )">
+                                     
+                                    @if (Find_Last_Replay_Comment_React($post_id , $lastreplaycommentreacts , 'value' ,$user_id ,$comment->id , $replaycomment->id , $lastreplaycomment->id))
+                                        <option selected>{{Find_Last_Replay_Comment_React($post_id , $lastreplaycommentreacts , 'value' ,$user_id ,$comment->id , $replaycomment->id , $lastreplaycomment->id)}}</option>
+                                    @else
+                                        <option selected>React</option>
+                                     @endif
+                                    <option>&#128151</option>
+                                    <option>&#128525</option>
+                                    <option>&#X1F44D</option>
+                                    <option>&#128514</option>
+                                    <option>&#128549</option>
+                                    <option>&#128531</option>
+                                    <option class="text-danger">Delete</option>
+                                    </select> 
                                 
                                 @if ($lastreplaycomment->user_id == $user_id)
                                     <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.edit',$lastreplaycomment->id)}} >Edit</a>
