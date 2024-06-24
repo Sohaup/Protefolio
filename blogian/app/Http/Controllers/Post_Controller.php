@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Post_Reacts;
 use App\Models\User;
@@ -23,9 +23,9 @@ class Post_Controller extends Controller
         //dd($postreacts);
         if (Auth::check()) {
           $user = Auth::user();
-          return view('blog' , ['posts'=>$postsData ,'bool'=>true ,'user'=>$user , 'postreacts'=>$postreacts]);  
+          return view('posts/blog' , ['posts'=>$postsData ,'bool'=>true ,'user'=>$user , 'postreacts'=>$postreacts]);  
         } else {
-        return view('blog' , ['posts'=>$postsData , 'bool'=>false , 'postreacts'=>$postreacts]);
+        return view('posts/blog' , ['posts'=>$postsData , 'bool'=>false , 'postreacts'=>$postreacts]);
         }
     }
 
@@ -34,7 +34,7 @@ class Post_Controller extends Controller
      */
     public function create()
     {
-        return view('createPost');
+        return view('posts/createPost');
     }
 
     /**
@@ -48,10 +48,11 @@ class Post_Controller extends Controller
         'content'=>['required','string','max:3000']
        ]);
        $file = $request->file('img');
-       if (move_uploaded_file($file->getPathname() , public_path('posts')."/".$file->getClientOriginalName())) {
+       $path = Str::slug($file->getClientOriginalName()).".".$file->getClientOriginalExtension();
+       if (move_uploaded_file($file->getPathname() , public_path('posts')."/".$path)) {
         $post = new Post();
         $post->title = $request->input('title');
-        $post->img = "/posts"."/".$file->getClientOriginalName();
+        $post->img = "/posts"."/".$path;
         $post->content = $request['content'];
         $post->user_id = Auth::id();
         $post->save();
@@ -76,7 +77,7 @@ class Post_Controller extends Controller
     {
         $post = Post::find($id);
 
-        return view('editPost',['post'=>$post]);
+        return view('posts/editPost',['post'=>$post]);
     }
 
     /**
@@ -90,10 +91,11 @@ class Post_Controller extends Controller
             'content'=>['required','string','max:3000']
            ]);
            $file = $request->file('img');
-           if (move_uploaded_file($file->getPathname() , public_path('posts')."/".$file->getClientOriginalName())) {
+           $path = Str::slug($file->getClientOriginalName()).".".$file->getClientOriginalExtension();
+           if (move_uploaded_file($file->getPathname() , public_path('posts')."/".$path)) {
             $post = Post::find($id);
             $post->title = $request->input('title');
-            $post->img = "/posts"."/".$file->getClientOriginalName();
+            $post->img = "/posts"."/".$path;
             $post->content = $request['content'];            
             $post->save();
             return redirect()->route('postspath.index');

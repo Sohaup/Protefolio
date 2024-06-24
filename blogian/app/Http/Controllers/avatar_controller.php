@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use App\Models\avatar;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class avatar_controller extends Controller
      */
     public function index()
     {
-        return view("createAvatar");
+        return view("avatars/createAvatar");
     }
 
     /**
@@ -28,7 +28,7 @@ class avatar_controller extends Controller
         $id = Auth::id();
         $user = User::find($id);
         $avatar = $user->avatar;
-        return View('deleteAvatar',['avatar'=>$avatar]);
+        return View('avatars/deleteAvatar',['avatar'=>$avatar]);
     }
 
     /**
@@ -42,7 +42,7 @@ class avatar_controller extends Controller
             'avatar'=>['required' , 'file' , 'mimes:jpg,jpeg,png']
         ]);
         $file = $request->file('avatar');
-        $path = $file->getClientOriginalName();
+        $path = Str::slug( $file->getClientOriginalName()).".".$file->getClientOriginalExtension() ;
         if (move_uploaded_file($file->getPathname() , public_path('avatars')."/".$path)) {
             $avatar = new avatar();
             $avatar->path = "/avatars".'/'.$path;
@@ -70,7 +70,7 @@ class avatar_controller extends Controller
     {
         $avatar = avatar::find($id);
         
-        return view('editAvatar',['id'=>$id , 'avatar'=>$avatar]);
+        return view('avatars/editAvatar',['id'=>$id , 'avatar'=>$avatar]);
     }
     /**
      * Update the specified resource in storage.
@@ -81,10 +81,10 @@ class avatar_controller extends Controller
             'avatar'=>['required','file','mimes:jpg,jpeg,png']
         ]);
         $file = $request->file('avatar');
-        $path = $file->getClientOriginalName();
+        $path = Str::slug($file->getClientOriginalName()).$file->getClientOriginalExtension();
         if (move_uploaded_file($file->getPathname() , public_path('avatars')."/".$path)) {
         $avatar = avatar::find($id);
-        $avatar->path = "/avatars"."/".$path;
+        $avatar->path = "/avatars"."/".$path;            
         $avatar->save();
         return redirect()->route('dashboard');
         } else {

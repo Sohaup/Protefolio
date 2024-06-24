@@ -27,10 +27,10 @@ class Last_Replay_Comment_Controller extends Controller
         $replaycomment = ReplayComments::find($request['replay_comment_id']);
         if ($request['replay_user_id']) { 
             //$replay_user = User::find($request['replay_user_id']);
-            return view('createlastreplaycomment' , ['replay_comment_id'=>$replaycomment->id , 'replay_user_id'=>$request['replay_user_id']]);               
+            return view('comments/createlastreplaycomment' , ['replay_comment_id'=>$replaycomment->id , 'replay_user_id'=>$request['replay_user_id']]);               
             
         } else {
-          return view('createlastreplaycomment' , ['replay_comment_id'=>$replaycomment->id]);
+          return view('comments/createlastreplaycomment' , ['replay_comment_id'=>$replaycomment->id]);
         }
       
     }
@@ -74,7 +74,7 @@ class Last_Replay_Comment_Controller extends Controller
     public function edit(string $id)
     {
        $last_replay_comment = Last_Replay_Comment::find($id); 
-       return view('editlastreplaycomment',['lastreplaycomment'=>$last_replay_comment]);
+       return view('comments/editlastreplaycomment',['lastreplaycomment'=>$last_replay_comment]);
     }
 
     /**

@@ -31,9 +31,9 @@ class Comment_Controller extends Controller
         $lastreplaycommentreacts = Last_Replay_Comment_React::all();
         if (Auth::check()) {
           $id = Auth::id();        
-            return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id,'replaycomments'=>$replaycomments ,'lastreplaycomments'=>$lastreplaycomments ,'commentreacts'=>$commentreacts , 'replaycommentreacts'=>$replaycommentreacts , 'lastreplaycommentreacts'=>$lastreplaycommentreacts]);         
+            return view('comments/comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users  ,'bool'=>true,'user_id' =>$id,'replaycomments'=>$replaycomments ,'lastreplaycomments'=>$lastreplaycomments ,'commentreacts'=>$commentreacts , 'replaycommentreacts'=>$replaycommentreacts , 'lastreplaycommentreacts'=>$lastreplaycommentreacts]);         
             } else {
-           return view('comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false,'replaycomments'=>$replaycomments,'lastreplaycomments'=>$lastreplaycomments , 'commentreacts' => $commentreacts , 'replaycommentreacts'=>$replaycommentreacts , 'lastreplaycommentreacts'=>$lastreplaycommentreacts]);
+           return view('comments/comments',['post_id'=>$post_id , 'comments'=>$comments , 'users'=>$users ,'bool'=>false,'replaycomments'=>$replaycomments,'lastreplaycomments'=>$lastreplaycomments , 'commentreacts' => $commentreacts , 'replaycommentreacts'=>$replaycommentreacts , 'lastreplaycommentreacts'=>$lastreplaycommentreacts]);
         }
     }
 
@@ -76,7 +76,7 @@ class Comment_Controller extends Controller
     public function edit(string $id)
     {
         $comment = Comment::find($id);
-        return view('editComment',['comment'=>$comment]);
+        return view('comments/editComment',['comment'=>$comment]);
     }
 
     /**

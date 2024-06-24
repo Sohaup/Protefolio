@@ -26,7 +26,7 @@ class Replay_Comments_Controller extends Controller
         $comment_id = $request['comment_id'];
         $comment = Comment::find($comment_id);
         $post_id = $comment->post->id;
-        return view('createreplaycomment',['comment_id' => $comment_id , 'post_id'=>$post_id]);       
+        return view('comments/createreplaycomment',['comment_id' => $comment_id , 'post_id'=>$post_id]);       
     }
     }
 
@@ -62,7 +62,7 @@ class Replay_Comments_Controller extends Controller
     {
         
         $replaycomment = ReplayComments::find($id); 
-        return view('editreplaycomment' , ['replaycomment'=>$replaycomment]);
+        return view('comments/editreplaycomment' , ['replaycomment'=>$replaycomment]);
     }
 
     /**

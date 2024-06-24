@@ -35,15 +35,15 @@
                          <form action="/postspath/{{$post->id}}" method="POST">                            
                             @csrf
                             @method('DELETE')
-                          <button class="btn btn-dark comment" type="button" onclick="handleClick({{$post->id}})"   > Comment</button>
+                          <button class="btn btn-outline-dark comment" type="button" onclick="handleClick({{$post->id}})"><img src="./imgs/comments2.svg" width="70px" height="30px"/></button>
                           @if($bool)
-                        <select class="form-select btn btn-outline-warning bg-light text-center rounded-2 react text-warning" @style(['width:100px','font-size:18px']) onchange="handleChange(this , {{$post->id}} , {{Find($post->id , $postreacts , 'id',$user)}})" >
+                        <select class="form-select btn btn-outline-warning  text-center rounded-2 react text-dark fw-bold " @style(['width:100px','font-size:18px','height:45px']) onchange="handleChange(this , {{$post->id}} , {{Find($post->id , $postreacts , 'id',$user)}})" >
                                                           
                             
                              @if (Find($post->id , $postreacts , 'value',$user))
                                 <option class="react_update" selected> {{Find($post->id , $postreacts , 'value',$user)}}</option>
                              @else
-                                 <option class="react_insert" selected>React</option>
+                                <option class="react_insert" selected >React</option>
                              @endif
                              
                             <option class="love">&#128151</option>
@@ -56,9 +56,9 @@
                         </select>
                        
                          @if ($user->id == $post->user_id)
-                         <button class="btn btn-success"><a href={{route('postspath.edit' , $post->id)}} @style(['text-decoration:none','color:white'])>Edit Post</a></button>                       
+                         <button class="btn btn-outline-success" type="button"><a href={{route('postspath.edit' , $post->id)}} @style(['text-decoration:none','color:white'])><img src="./imgs/edit.svg" width="70px" height="30px"/></a></button>                       
                            
-                         <button class="btn btn-danger " type="submit">Delete Post</button>
+                         <button class="btn btn-outline-danger " type="submit"><img src="./imgs/delete.svg" width="70px" height="30px"/></button>
                         
                          @endif    
                          @endif    

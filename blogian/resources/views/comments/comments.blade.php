@@ -79,7 +79,7 @@
                           <div class="d-flex flex-row gap-5 justify-content-around">
                                  
                               @if ($bool)
-                              <a class="text-dark  " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}} >Replay</a>
+                              <a class="text-dark  " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.create',['comment_id'=>$comment->id])}} ><img src="./imgs/comments2.svg" width="30px" /></a>
                                   <select class="form-select text-warning comment_react" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) onchange="handleChange(this , {{$post_id}} , {{$comment->id}} , {{Find_Comment_React($post_id , $commentreacts , 'id' , $user_id , $comment->id)}})" id={{$comment->id}} role={{Find_Comment_React($post_id , $commentreacts , 'id' , $user_id , $comment->id)}} >
                                     @if (Find_Comment_React($post_id , $commentreacts , 'value' , $user_id , $comment->id))
                                     <option selected class="text-warning m-0">{{Find_Comment_React($post_id , $commentreacts , 'value' , $user_id , $comment->id)}}</option>
@@ -96,8 +96,8 @@
                                   </select> 
                               
                               @if ($comment->user_id == $user_id)
-                                  <a class="text-success " @style(['font-size:19px','text-decoration:none',]) href={{route('comments.edit',$comment->id)}}>Edit</a>
-                                  <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none',]) value="Delete" type="submit" />
+                                  <a class="text-success " @style(['font-size:19px','text-decoration:none',]) href={{route('comments.edit',$comment->id)}}><img src="./imgs/edit2.svg" width="30px"/></a>
+                                  <button class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none'])  type="submit" ><img src="./imgs/delete2.svg" width="30px"/></button>
                               @endif
                               @endif
                          </div>
@@ -138,7 +138,7 @@
                         <div class="d-flex flex-row gap-5 justify-content-around">
                                
                             @if ($bool)                               
-                               <a class="text-dark replay  " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id])}}  >Replay</a>                              
+                               <a class="text-dark replay  " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id])}}><img src="./imgs/comments2.svg" width="30px" /></a>                              
                           
                                <select class="form-select text-warning" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) onchange="handleReact(this , {{$post_id}} , {{$comment->id}} , {{$replaycomment->id}} , {{Find_Replay_Comment_React($post_id , $replaycommentreacts , 'id' ,$user_id ,$comment->id , $replaycomment->id)}})">
                                 @if (Find_Replay_Comment_React($post_id , $replaycommentreacts , 'value' ,$user_id ,$comment->id , $replaycomment->id))
@@ -156,8 +156,8 @@
                                 </select> 
                             
                             @if ($replaycomment->user_id == $user_id)
-                                <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.edit',$replaycomment->id)}} >Edit</a>
-                                <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none']) value="Delete" type="submit" />
+                                <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('replaycomments.edit',$replaycomment->id)}} ><img src="./imgs/edit2.svg" width="30px"/></a>
+                                <button class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none'])  type="submit" ><img src="./imgs/delete2.svg" width="30px"/></button>
                             @endif
                             @endif
                        </div>
@@ -203,7 +203,7 @@
                             <div class="d-flex flex-row gap-5 justify-content-around">
                                    
                                 @if ($bool)                               
-                                   <a class="text-dark replay " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id , 'replay_user_id'=>$lastreplaycomment->user_id])}}>Replay</a>                              
+                                   <a class="text-dark replay " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.create',['replay_comment_id'=>$replaycomment->id , 'replay_user_id'=>$lastreplaycomment->user_id])}}><img src="./imgs/comments2.svg" width="30px" /></a>                              
                               
                                    <select class="form-select text-warning" @style(['width:100px' , 'background-color:transparent','border:none','font-size:19px']) onchange="handle_Last_React(this , {{$post_id}} , {{$comment->id}} , {{$replaycomment->id}} ,  {{$lastreplaycomment->id}} , {{Find_Last_Replay_Comment_React($post_id , $lastreplaycommentreacts , 'id' ,$user_id ,$comment->id , $replaycomment->id , $lastreplaycomment->id)}}  )">
                                      
@@ -222,8 +222,8 @@
                                     </select> 
                                 
                                 @if ($lastreplaycomment->user_id == $user_id)
-                                    <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.edit',$lastreplaycomment->id)}} >Edit</a>
-                                    <input class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none']) value="Delete" type="submit" />
+                                    <a class="text-success " @style(['font-size:19px','text-decoration:none']) href={{route('lastreplaycomments.edit',$lastreplaycomment->id)}} ><img src="./imgs/edit2.svg" width="30px"/></a>
+                                    <button class="text-danger" @style(['font-size:19px','text-decoration:none','background-color:transparent','border:none'])  type="submit" ><img src="./imgs/delete2.svg" width="30px"/></button>
                                 @endif
                                 @endif
                            </div>
@@ -235,7 +235,7 @@
                      @endforeach
                        
                     @empty
-                        <h1>The Comment Is Empty</h1>
+                        <h1>The Comments Is Empty</h1>
                     
                     @endforelse
                     
